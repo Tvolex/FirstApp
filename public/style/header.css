@@ -1,0 +1,71 @@
+header {
+    background-color: whitesmoke;
+    border: none;
+}
+
+.btnMenu {
+    border: none;
+    width: 150px;
+    height: 45px;
+    background-color: whitesmoke;
+    font-weight: bold;
+    transition: 0.3s all;
+
+}
+.btnMenu:hover{
+    font-size: 20px;
+    background-color: white;
+}
+
+.btnMenu:focus {
+    background-color: white;
+    outline: none;
+    font-size: 20px;
+}
+.MenuDropDown {
+     width: 150px;
+ }
+ul{
+    background-color: white;
+    width: 150px;
+    padding-left: 5px;
+
+}
+li{
+    transition: 0.3s all;
+    padding: 5px;
+    border-bottom: solid 1px black;
+}
+li:hover{
+    padding: 10px;
+    background-color: whitesmoke;
+}
+a{
+    text-decoration: none;
+    color:#616163;
+    transition: 0.3s all;
+}
+a:hover{
+    text-decoration: none;
+    color:black;
+}
+#btnExit {
+    position: absolute;
+    margin-left: 93%;
+    width: 7%;
+    height: 45px;
+    cursor: pointer;
+    padding-top: 10px;
+    transition: 0.3s all;
+    text-decoration: none;
+
+}
+#btnExit:hover{
+    font-size: 20px;
+    background-color: white;
+}
+#btnExit span {
+    padding-top: 100%;
+    font-weight: bold;
+}
+
