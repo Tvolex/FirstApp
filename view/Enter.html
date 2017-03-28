@@ -269,27 +269,24 @@
                     url: url,
                     data: data,
                     success: function (data,success,res) {
-                        console.log("success: ", success);
-                        if(data.UserEmail === UserEmail.value && res.status == 200) {
+                        if(res.status == 200) {
                             info.css("color","black");
                             info.text("Hello, " + UserEmail.value);
                             info.css("opacity","1");
                             window.location.href = "/MyOffice";
-                        } else {
-                            console.log("401");
+                            console.log("found user");
                         }
                     },
                     error: function (err) {
-                        if(err.status == 401) {
-                            info.css("color","red");
+                        if (err.status == 401) {
+                            info.css("color", "red");
                             info.text("Wrong login or password");
-                            info.css("opacity","1")
+                            info.css("opacity", "1")
                         } else {
-                            info.text("Error: status code: " + err.status );
-                            info.css("opacity","1");
-                            info.css("color","red");
+                            info.text("Error. status code: " + err.status);
+                            info.css("opacity", "1");
+                            info.css("color", "red");
                         }
-
                     }
                 });
             } else {

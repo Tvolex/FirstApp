@@ -156,10 +156,12 @@
                                     $.ajax({
                                         url: "/deleteAcc",
                                         type: "POST",
-                                        success: function (res) {
+                                        success: function (err, data, res) {
                                             console.log("RESPONSE: ", res);
-                                            if(res) {
-                                                window.location.href = "Enter.html";
+                                            if(res.status == 200) {
+                                                window.location.href = "/Enter";
+                                            } else {
+                                                console.log(res.status);
                                             }
                                         }
                                     });

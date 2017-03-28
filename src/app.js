@@ -18,8 +18,6 @@ import MyOffice from './routes/MyOffice';
 //noinspection JSUnresolvedVariable
 import deleteAcc from './routes/deleteAcc';
 //noinspection JSUnresolvedVariable
-import CheckLogin from './routes/CheckLogin';
-//noinspection JSUnresolvedVariable
 import change from './routes/change';
 //noinspection JSUnresolvedVariable
 import deleteS from './routes/deleteS'
@@ -66,7 +64,6 @@ app.use('/MyOffice', MyOffice);
 app.use('/Authorization', Authorization);
 app.use('/AuthForDesktop', AuthFD);
 app.use('/Register', Register);
-app.use('/CheckLogin', CheckLogin);
 app.use('/login', login);
 app.use('/deleteAcc', deleteAcc);
 app.use('/change', change);

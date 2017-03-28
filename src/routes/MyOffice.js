@@ -32,11 +32,12 @@ var MyOffice = router.get('/',(req,res)=>{
                         res.cookie('btnExit', true)
                             .status(200)
                             .render("MyOffice",options);
-                    } else if(!doc) {
+                    } else {
                         res.clearCookie('btnExit')
                             .status(401)
-                            .render('/Enter');
+                            .render('Enter');
                     }
+
                     db.close();
                 });
             }

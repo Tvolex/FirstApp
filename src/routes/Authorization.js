@@ -19,18 +19,21 @@ var Auth = router.post("/", (req,res) => {
             } else {
                 console.log('Connection to db', DBurl);
                 var collection = db.collection('users');
-                collection.find({"UserEmail": UserEmail, "password": UserPassword}).toArray((err, doc) => {
+                collection.find({"UserEmail": UserEmail, "password": UserPassword}).limit(1).next((err, doc) => {
+                    console.log(doc);
                     if (err) {
                         console.log(err);
-                    } else if (doc) {                                                      // в бд є такий юзер
-                        User.UserEmail = UserEmail;
+                    } else if(doc) {
+                        console.log("found user");
                         req.session.UserEmail = UserEmail;
                         collection.updateOne({"UserEmail": UserEmail}, {$set: {"SessionID" : req.sessionID}});
                         res.cookie('btnExit', true)
-                            .send(User);
-                    } else {                                                                  // в бд немає такого юзера
-                        User.UserEmail = undefined;
+                            .status(200)
+                            .send(User)
+                    } else if(!doc) {                                                                  // в бд немає такого юзера
+                        console.log("not found user");
                         res.status(401)
+                            .cookie('btnExit', false)
                             .send(User)
                             .end();
                     }
