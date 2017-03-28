@@ -35,7 +35,7 @@ var MyOffice = router.get('/',(req,res)=>{
                     } else if(!doc) {
                         res.clearCookie('btnExit')
                             .status(401)
-                            .redirect('/Enter');
+                            .render('/Enter');
                     }
                     db.close();
                 });

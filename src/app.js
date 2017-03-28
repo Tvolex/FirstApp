@@ -53,9 +53,6 @@ app.get('/index', (req,res)=>{
 app.get('/Enter', (req,res)=>{
     res.render("Enter");
 });
-app.get('/analysis', (req, res)=> {
-    res.render('analysis');
-});
 app.get('/AboutUs', (req,res)=>{
     res.render("AboutUs");
 });
