@@ -84,7 +84,8 @@ var change = router.post('/', (req, res) => {
                             res.json(user);
                         } else if(!result) {
                             user.saved = false;
-                            res.json(user);
+                            res.json(user).
+                                end();
                         }
                         db.close();
                     })
