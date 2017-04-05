@@ -1,6 +1,6 @@
-import config from '../config';
-import mongodb from 'mongodb';
-import express from 'express';
+const mongodb = require ('mongodb');
+const config = require ('../config');
+const express = require ('express');
 
 const router = express.Router();
 const MongoClient = mongodb.MongoClient;

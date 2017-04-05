@@ -1,6 +1,6 @@
-import config from '../config';
-import mongodb from 'mongodb';
-import express from 'express';
+const config = require ('../config');
+const mongodb = require ('mongodb');
+const express = require ('express');
 
 
 const DBurl = config.DBurl;

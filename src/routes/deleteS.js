@@ -1,5 +1,4 @@
-import express from 'express';
-import path from 'path';
+const express = require ('express');
 const router = express.Router();
 
 var deleteS = router.post('/', (req, res) => {
