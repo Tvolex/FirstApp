@@ -62,6 +62,9 @@ app.use('/photo/', getPhoto);
 app.get('/test', (req, res) => {
     res.json({success: true});
 });
+app.get('/Stas', (req, res) => {
+   res.send({"Stas": true});
+});
 
 app.listen(config.port, () => {
     console.log('Server start on port ' + config.port);
