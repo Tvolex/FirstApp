@@ -1,7 +1,7 @@
 {
   "name": "Tvolex",
   "version": "1.10.1",
-  "description": "",
+  "description": "My first app on Node.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
