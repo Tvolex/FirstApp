@@ -1,7 +1,7 @@
 {
-  "name": "Tvolex",
+  "name": "tvolex",
   "version": "1.10.1",
-  "description": "",
+  "description": "My first app on Node.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
@@ -60,7 +60,7 @@
     "sinon-chai": "2.8.0"
   },
   "engines": {
-    "node": "6.5.0",
-    "npm": "3.10.3"
+    "node": "6.10.3",
+    "npm": "3.10.10"
   }
 }
