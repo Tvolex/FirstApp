@@ -5,7 +5,7 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('1) Test.', ()=> {
+describe('Run test should', ()=> {
     // -- Get Test --
     describe('/Get test', ()=> {
         it('response 200 status code', (done)=> {
@@ -33,5 +33,24 @@ describe('1) Test.', ()=> {
                     done();
                 });
         });
+    });
+    describe('/Post test', () => {
+        let reqParams = {
+            url: 'http://localhost:3000',
+            method: 'POST',
+            data: {
+                UserEmail: "admin",
+                password: "admin"
+            }
+        };
+       /* it('should login admin', (done)=> {
+            chai.request(server)
+                .post(reqParams.url + '/Authorization', reqParams.data)
+                .end((err, res) => {
+                    res.should.be.a('Object');
+                    res.UserEmail.should.be.equal("admin");
+                    done();
+                });
+        })*/
     });
 });

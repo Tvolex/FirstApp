@@ -87,12 +87,10 @@
         <div class="modal fade" id="modal-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content " >
-
                     <div class="modal-header">
                         <h4 class="modal-title" align="center">Photo
                             <button class="close"  type="button" data-dismiss="modal"> &times; </button>
                         </h4>
-
                     </div>
                     <div id="modalBody" class="modal-body">
                         <script>
@@ -109,8 +107,6 @@
                                     $("#modalBody").empty();
                                 });
                             });
-
-
                         </script>
                     </div>
                     <div class="modal-footer">
@@ -127,44 +123,23 @@
             <h4  id="email">Email : {{Email}}</h4>
             <hr>
         </div>
-
-
-
-
     </div>
     <div class="col-md-6" align="center" >
         <hr  color="yellowgreen" style=" height: 2px;">
-        <a href="/RandomImages" style="text-decoration: none">
-            <div class="RImageBtn">
-                <div class="BtnTitle"><b>Random image</b></div>
-            </div>
-        </a>
-
+        <div class="RImageBtn" style="background-image: url('//unsplash.it/400/150?random');">
+            <a href="/randomImages"><div class="BtnTitle"><b>Random image</b></div></a>
+        </div>
         <hr>
-
-        <a href="chat.html" onclick="alert('Chat in process develop '); return false;" style="text-decoration: none">
-            <div class="ChatBtn">
-                <div class="BtnTitle"><b>Go to chat</b></div>
-            </div>
-        </a>
-
+        <div class="RImageBtn" style="background-image: url('http://journalismpakistan.com/news/By%20line%20a%20contentious%20issue.jpg');">
+            <a href="/news"><div class="BtnTitle"><b>News</b></div></a>
+        </div>
         <hr>
-
-        <a href="/Setting" style="text-decoration: none">
-            <div class="SettingBtn">
-                <img class="settingImage" src="style/img/setting.png" alt="error">
-                <div class="BtnTitle">
-
-                    <b>Setting</b>
-                </div>
-            </div>
-        </a>
-
+        <div class="RImageBtn" href="/Setting" style="background-image: url('http://endlessicons.com/wp-content/uploads/2012/11/setting-icon.png?w=540')">
+            <a href="/setting"><div class="BtnTitle"><b>Setting</b></div></a>
+        </div>
         <hr>
     </div>
-
 </div>
-
 </div>
 <script>
     var RealName = document.getElementById("RealName");

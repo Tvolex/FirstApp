@@ -1,0 +1,89 @@
+html {
+    background-color:#fffacd;
+}
+.GeneralBlock {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.newsBlock{
+    position: relative;
+    border: solid black 0px;
+    width: 50%;
+    height: 50%;
+    margin-top: 3%;
+    margin-left: 50%;
+    left: -25%;
+    background-color:#FFFFF0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+.apdxBlock{
+    position: relative;
+    width: 100%;
+    height: 5%;
+    background-color: #1b6d85;
+}
+#ModalBodyAddNews{
+    width: 50%;
+    height: 50%;
+}
+.spanTitleAddNews{
+    position: absolute;
+    height: 35px;
+    margin-top: 3.5%;
+    padding-top: 5px;
+    margin-left: 50%;
+    width: 50%;
+    left: -25%;
+    font-size: large;
+    text-align: center;
+    background-color: #67b168;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.spanPopUpAddTitle {
+
+    text-align: center;
+}
+.formCreateNews{
+    margin-left: 50%;
+    left: -25%;
+    width: 100%;
+    transition: 0.3s all ;
+}
+.inputPopUpAddTitle{
+    width: 100%;
+}
+.inputPopUpAddDescription {
+    width: 100%;
+    height: 150px;
+    text-align: start;
+}
+#addNewsOpen {
+    position: relative;
+    height: 30px;
+    padding-top: 3px;
+    font-size: larger;
+    margin-top: 3.8%;
+    margin-left: 65%;
+    left: -50px;
+
+}
+.newsHeader{
+    position: inherit;
+    width: 100%;
+    height: 20%;
+    border: solid 0px black;
+    margin-top: 0%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.spanNewsHeader {
+    position: absolute;
+    text-align: center;
+    margin-top: 2%;
+    width: 100%;
+    font-size: x-large;
+}
+.newsBody{
+    padding-top: 0%;
+    font-size: medium;
+}

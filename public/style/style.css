@@ -238,7 +238,7 @@ section::selection {
     outline: none;
     border: none;
 }
-#NikasEmail, #VasyasEmail,#StanislawsEmail {
+#VasyasEmail,#StanislawsEmail {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

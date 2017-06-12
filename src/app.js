@@ -11,8 +11,11 @@ const Register = require ('./routes/Register');
 const MyOffice = require ('./routes/MyOffice');
 const deleteAcc = require ('./routes/deleteAcc');
 const change = require ('./routes/change');
+const getNews = require('./routes/getNews');
+const createNews = require('./routes/createNews');
 const deleteS = require ('./routes/deleteS');
 const getPhoto = require ('./routes/getPhoto');
+const randomPhoto = require('./routes/randomPhoto');
 const app = express();
 
 app.use(cookieParser());
@@ -44,12 +47,18 @@ app.get('/Enter', (req,res)=>{
 app.get('/AboutUs', (req,res)=>{
     res.render("AboutUs");
 });
-app.get('/Setting', (req,res)=>{
+app.get('/setting', (req,res)=>{
     res.render("Setting");
 });
-app.get('/RandomImages', (req,res)=>{
+app.get('/randomImages', (req,res)=>{
     res.render("RandomImages");
 });
+app.get('/news', (req, res) => {
+    res.render('news');
+});
+
+app.use('/getNews', getNews);
+app.use('/createNews', createNews);
 app.use('/MyOffice', MyOffice);
 app.use('/Authorization', Authorization);
 app.use('/AuthForDesktop', AuthFD);
@@ -59,11 +68,9 @@ app.use('/deleteAcc', deleteAcc);
 app.use('/change', change);
 app.use('/delete', deleteS);
 app.use('/photo/', getPhoto);
+app.use('/random', randomPhoto);
 app.get('/test', (req, res) => {
     res.json({success: true});
-});
-app.get('/Stas', (req, res) => {
-   res.send({"Stas": true});
 });
 
 app.listen(config.port, () => {

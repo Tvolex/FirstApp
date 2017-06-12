@@ -3,6 +3,7 @@
     width: 50%;
 
 }
+
 #avatar:hover{
     background-color: red;
     cursor: pointer;
@@ -79,7 +80,7 @@ hr{
     z-index: -1;
     position: absolute;
     margin-left: -10%;
-    margin-top: 1%;
+    margin-top: 0%;
     width: 20%;
 }
 .settingImage:hover{
@@ -97,12 +98,17 @@ hr{
     background-position: center;
 
 }
+.linkBlocks {
+    width: 10%;
+    height: 10%;
+    border: solid black 2px;
+}
 .RImageBtn{
-    width: 80%;
+    width: 70%;
     height: 20%;
     border: solid 2px black;
     color:black;
-    background-image: url("//unsplash.it/400/150?random");
+    cursor: pointer;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

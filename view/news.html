@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Enter</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <link rel="stylesheet" type="text/css" href="style/newsStyle.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="scripts/cookie.js"></script>
+    <script>
+
+    </script>
+</head>
+<header>
+    <div class="dropdown">
+        <button class="btn  btn-primary" style="height:45px;width: 100px" data-toggle="dropdown">Menu </button>
+        <ul class="dropdown-menu" role="menu" >
+            <li><a   href="/index">Home</a></li>
+            <li><a  href="/AboutUs">About Us</a></li>
+            <li><a  href="/MyOffice">Account</a></li>
+            <li><a  href="/Enter">Sign In</a></li>
+        </ul>
+        <input type="button" id="btnExit" value="Exit" class="btn btn-danger"  />
+    </div>
+    <script>
+        if($.cookie("btnExit") == undefined) {
+            $("#btnExit").remove();
+        }
+        $("#btnExit").click(function () {
+            $.ajax({
+                url: "/delete",
+                type: "POST",
+                success:function (res) {
+                    if(res) {
+                        window.location.href = "/index";
+                    }
+                },
+                error: function (err) {
+                    console.log("Error", err);
+                    alert("Error", err);
+                }
+            });
+            $.removeCookie('btnExit');
+            $("#btnExit").remove();
+        });
+    </script>
+</header>
+<body>
+
+<div class="GeneralBlock">
+    <div class="apdxBlock">
+        <span class="spanTitleAddNews">Are you have interested news?</span>
+        <button class="btn  btn-primary" id="addNewsOpen"  data-toggle="modal" data-target="#modal-1"  >Add news</button>
+    </div>
+    <div class="modal fade" id="modal-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" align="center">
+                        Add news
+                        <button class="close"  type="button" data-dismiss="modal"> &times; </button>
+                    </h4>
+                </div>
+                <div class="modal-body" id="ModalBodyAddNews">
+                    <form action="/createNews" method="post" id="formCreateNews" name="formCreateNews" class="formCreateNews">
+                        <span class="spanPopUpAddTitle">Add news title</span>
+                        <br>
+                        <input type="text" class="inputPopUpAddTitle" id="title" name="title">
+                        <br><span class="spanPopUpAddTitle">Add news description</span><br>
+                        <input type="text" class="inputPopUpAddDescription" id="description" name="description" >
+
+                    </form>
+                    <button class="btn btn-primary" id="addNews">Add news</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="newsBlock" name="newsBlock" id="newsBlock1">
+        <div class="newsHeader">
+            <span class="spanNewsHeader" name="spanNewsHeader1">News Name</span>
+
+        </div>
+        <div class="newsBody">
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+<script>
+    var btnAddNews = $('#addNews');
+    var newsIDs = [];
+    var sizeNews;
+    Object.size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+    function buildNews (data)  {
+        if(data.length > 0) {
+            var newBlock = $('.newsBlock:first').clone();
+            for(var i = data.length - 1; i > -1; i--) {
+                newBlock = $('.newsBlock:first').clone();
+                newBlock.find('.spanNewsHeader').text(data[i].title);
+                newBlock.find('.newsBody').text(data[i].description);
+                GenBlock.append(newBlock);
+            }
+            $('.newsBlock:first').remove();
+        }
+    }
+    const getNews = () => {
+        $.ajax({
+            url: "/getNews",
+            type: "GET",
+            success: (res) => {
+                console.log('err: ' + res);
+                checkNews(res);
+
+            },
+            error: (err) => {
+                console.log("err");
+                console.log(err.responseJSON);
+                checkNews(err.responseJSON);
+            }
+        });
+        const checkNews = (news) => {
+            var maxId = $('.newsBlock:first').id;
+            sizeNews = news.length;
+            if(news._id !== undefined) {
+                if(maxId < news[0]._id) {
+                    for(let i = maxId + 1; i < sizeNews; i++) {
+                        buildNews(news);
+                    }
+                } else {
+                    for(var i = 0; i < sizeNews; i++) {
+                        buildNews(news);
+                    }
+                }
+            }
+
+        };
+
+    };
+
+
+    setInterval(getNews, 5000);
+
+    btnAddNews.click(() => {
+        var maxId = {"name": "sizeNews", "value": sizeNews};
+        var data = $('#formCreateNews').serializeArray();
+        data.push(maxId);
+        console.log(data);
+        $.ajax({
+            url: '/createNews',
+            type: "POST",
+            data: data,
+            success: (res) => {
+                buildNews(res);
+
+            },
+            error: (err) => {
+                buildNews(err.responseJSON);
+            }
+        })
+    });
+
+    var GenBlock = $('.GeneralBlock');
+
+</script>
+</html>
