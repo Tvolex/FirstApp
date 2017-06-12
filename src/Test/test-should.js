@@ -24,33 +24,25 @@ describe('Run test should', ()=> {
                     done();
                 });
         });
-        it('response body should be equal true', (done)=> {
-            chai.request(server)
-                .get('/test')
-                .end((err, res) => {
-                    res.body.should.have.property('success');
-                    res.body.success.should.be.equal(true);
-                    done();
-                });
-        });
+
     });
-    describe('/Post test', () => {
-        let reqParams = {
-            url: 'http://localhost:3000',
-            method: 'POST',
-            data: {
-                UserEmail: "admin",
-                password: "admin"
-            }
-        };
-       /* it('should login admin', (done)=> {
-            chai.request(server)
-                .post(reqParams.url + '/Authorization', reqParams.data)
-                .end((err, res) => {
-                    res.should.be.a('Object');
-                    res.UserEmail.should.be.equal("admin");
-                    done();
-                });
-        })*/
-    });
+    // describe('/Post test', () => {
+    //     let reqParams = {
+    //         url: 'http://localhost:3000',
+    //         method: 'POST',
+    //         data: {
+    //             UserEmail: "admin",
+    //             password: "admin"
+    //         }
+    //     };
+    //     it('should login admin', (done)=> {
+    //         chai.request(server)
+    //             .post(reqParams.url + '/Authorization', reqParams.data)
+    //             .end((err, res) => {
+    //                 res.should.be.a('Object');
+    //                 res.UserEmail.should.be.equal("admin");
+    //                 done();
+    //             });
+    //     })
+    // });
 });
