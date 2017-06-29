@@ -9,9 +9,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="scripts/cookie.js"></script>
-    <script>
 
-    </script>
 </head>
 <header>
     <div class="dropdown">
@@ -49,7 +47,7 @@
 </header>
 <body>
 
-<div class="GeneralBlock">
+<div class="GeneralBlock" id="GeneralBlock">
     <div class="apdxBlock">
         <span class="spanTitleAddNews">Are you have interested news?</span>
         <button class="btn  btn-primary" id="addNewsOpen"  data-toggle="modal" data-target="#modal-1"  >Add news</button>
@@ -77,8 +75,8 @@
             </div>
         </div>
     </div>
-
-    <div class="newsBlock" name="newsBlock" id="newsBlock1">
+    <!--
+    <div class="newsBlock" name="newsBlock" id="newsBlock0">
         <div class="newsHeader">
             <span class="spanNewsHeader" name="spanNewsHeader1">News Name</span>
 
@@ -86,14 +84,15 @@
         <div class="newsBody">
         </div>
     </div>
+    -->
+
 </div>
 </div>
 
 </body>
 <script>
     var btnAddNews = $('#addNews');
-    var newsIDs = [];
-    var sizeNews;
+    var lastNewsId = 0;
     Object.size = function(obj) {
         var size = 0, key;
         for (key in obj) {
@@ -101,75 +100,57 @@
         }
         return size;
     };
-    function buildNews (data)  {
-        if(data.length > 0) {
-            var newBlock = $('.newsBlock:first').clone();
-            for(var i = data.length - 1; i > -1; i--) {
-                newBlock = $('.newsBlock:first').clone();
-                newBlock.find('.spanNewsHeader').text(data[i].title);
-                newBlock.find('.newsBody').text(data[i].description);
-                GenBlock.append(newBlock);
-            }
-            $('.newsBlock:first').remove();
-        }
-    }
-    const getNews = () => {
-        $.ajax({
-            url: "/getNews",
-            type: "GET",
-            success: (res) => {
-                console.log('err: ' + res);
-                checkNews(res);
 
-            },
-            error: (err) => {
-                console.log("err");
-                console.log(err.responseJSON);
-                checkNews(err.responseJSON);
+
+    const getNews = (idChanged) => {
+        let getNewsFromId = lastNewsId;
+        if (idChanged !== lastNewsId) {
+            getNewsFromId = idChanged - lastNewsId;
+        }
+        $.ajax({
+            url: `/getNews`,
+            type: "GET",
+            data: `lastNewsId=${getNewsFromId}`,
+            dataType: "json",
+            success: (data) => {
+
+                for(let i = 0; i < data.length; i++) {
+                    $('.GeneralBlock').append(`<div class="newsBlock" name="newsBlock" id="newsBlock${data[i]._id}" ></div>`);
+                    $(`#newsBlock${data[i]._id}`).append(`<div class="newsHeader"></div>`);
+                    $(`#newsBlock${data[i]._id}`).find(".newsHeader").append(`<div class="spanNewsHeader">${data[i].title}</div>`);
+                    $(`#newsBlock${data[i]._id}`).append(`<div class="newsBody">${data[i].description}</div>`);
+
+                }
+
+
+                lastNewsId = data.length;
+
             }
         });
-        const checkNews = (news) => {
-            var maxId = $('.newsBlock:first').id;
-            sizeNews = news.length;
-            if(news._id !== undefined) {
-                if(maxId < news[0]._id) {
-                    for(let i = maxId + 1; i < sizeNews; i++) {
-                        buildNews(news);
-                    }
-                } else {
-                    for(var i = 0; i < sizeNews; i++) {
-                        buildNews(news);
-                    }
-                }
-            }
 
-        };
 
     };
-
-
-    setInterval(getNews, 5000);
+    //setInterval(getNews, 1000);
+    getNews(0);
 
     btnAddNews.click(() => {
-        var maxId = {"name": "sizeNews", "value": sizeNews};
-        var data = $('#formCreateNews').serializeArray();
-        data.push(maxId);
-        console.log(data);
+        const data = $('#formCreateNews').serializeArray();
+        data.push({"name": "sizeNews", "value": lastNewsId});
         $.ajax({
             url: '/createNews',
             type: "POST",
             data: data,
             success: (res) => {
-                buildNews(res);
-
+                console.log("RES: " + res);
+                location.reload();
             },
             error: (err) => {
-                buildNews(err.responseJSON);
+                getNews(err);
             }
         })
     });
 
-    var GenBlock = $('.GeneralBlock');
+    const GenBlock = $('.GeneralBlock');
 
 </script>
 </html>

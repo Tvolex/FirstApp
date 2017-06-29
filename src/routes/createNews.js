@@ -11,16 +11,14 @@ const MongoClient = mongodb.MongoClient;
 
 
 
-var createNews = router.post('/', (req,res) => {
-    var title = req.body.title;
-    var description = req.body.description;
-    var maxId = req.body.sizeNews;
+const createNews = router.post('/', (req,res) => {
+    const title = req.body.title;
+    const description = req.body.description;
+    let lastNewsId = req.body.sizeNews;
 
-    console.log("-------request---------");
-    console.log(req.body.sizeNews);
-    console.log("-------request---------");
+
     const news = {
-        _id: parseInt(maxId) + 1,
+        _id: parseInt(lastNewsId) + 1,
         "title": title,
         "description": description,
         "createdAt": new Date(),
@@ -28,17 +26,17 @@ var createNews = router.post('/', (req,res) => {
     };
     MongoClient.connect(DBurl, (error, db) => {
         console.log('Connection to db', DBurl);
-        var collection = db.collection('news');
-
+        const collection = db.collection('news');
         if (error) {
             console.log(error);
             res.status(error.status)
                 .send(error);
         } else {
-            console.log("news id: " + news._id);
             collection.insertOne(news);
-            db.close();
+            res.status(200)
+                .send("");
         }
+        db.close();
     })
 });
 

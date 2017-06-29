@@ -16,6 +16,7 @@ const createNews = require('./routes/createNews');
 const deleteS = require ('./routes/deleteS');
 const getPhoto = require ('./routes/getPhoto');
 const randomPhoto = require('./routes/randomPhoto');
+const expressVue = require('express-vue');
 const app = express();
 
 app.use(cookieParser());
@@ -32,8 +33,8 @@ app.use(session({
 app.set('views', path.join(__dirname, '../view'));
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
-//noinspection JSUnresolvedVariable
 app.use(express.static(path.join(__dirname, '../public')));
+
 
 app.get('/', (req,res)=>{
     res.render('index');
@@ -55,6 +56,13 @@ app.get('/randomImages', (req,res)=>{
 });
 app.get('/news', (req, res) => {
     res.render('news');
+});
+app.get('/vue', (req, res) => {
+    res.render('vue',  {
+        data: {
+            message: 'Hello, Developer!!!!'
+        }
+    });
 });
 
 app.use('/getNews', getNews);

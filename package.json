@@ -28,11 +28,13 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
+    "express-vue": "^3.15.0",
     "fs": "0.0.1-security",
     "handlebars": "^4.0.5",
     "hbs": "^4.0.0",
     "http": "0.0.0",
     "image-downloader": "^3.2.2",
+    "jade": "^1.11.0",
     "middleware": "^1.0.0",
     "mongodb": "^2.1.21",
     "node-static": "^0.7.8",
@@ -41,6 +43,8 @@
     "require": "^2.4.20",
     "short-id": "0.1.0-1",
     "unsplash-js": "^4.2.0",
+    "vue": "^2.3.4",
+    "webpack": "^3.0.0",
     "ws": "^1.1.1"
   },
   "devDependencies": {
@@ -61,7 +65,8 @@
     "nodemon": "^1.10.2",
     "request": "^2.81.0",
     "sinon": "1.17.5",
-    "sinon-chai": "2.8.0"
+    "sinon-chai": "2.8.0",
+    "vue-loader": "^13.0.0"
   },
   "engines": {
     "node": "6.10.3",
